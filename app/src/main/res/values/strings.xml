@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">Shopping List</string>
+
+    <string name="title_section1">Shopping List</string>
+    <string name="title_section2">Manage Locations</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">+ Add</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string-array name="categories">
+        <item>Grocery</item>
+        <item>Vegetable</item>
+        <item>Fruit</item>
+        <item>Electrical Item</item>
+        <item>Hardware Item</item>
+        <item>Housekeeping Item</item>
+        <item>Milk Product</item>
+        <item>Meat and Non-vegetable</item>
+        <item>Bakery Product</item>
+        <item>Stationery Item</item>
+        <item>Medicine</item>
+        <item>Entertainment</item>
+    </string-array>
+
+    <string-array name="days">
+        <item>0 day</item>
+        <item>1 day</item>
+        <item>2 days</item>
+        <item>3 days</item>
+        <item>4 days</item>
+        <item>5 days</item>
+        <item>6 days</item>
+        <item>7 days</item>
+        <item>8 days</item>
+        <item>9 days</item>
+        <item>10 days</item>
+        <item>11 days</item>
+        <item>12 days</item>
+        <item>13 days</item>
+        <item>14 days</item>
+        <item>15 days</item>
+        <item>16 days</item>
+        <item>17 days</item>
+        <item>18 days</item>
+        <item>19 days</item>
+        <item>20 days</item>
+        <item>21 days</item>
+        <item>22 days</item>
+        <item>23 days</item>
+        <item>24 days</item>
+        <item>25 days</item>
+        <item>26 days</item>
+        <item>27 days</item>
+        <item>28 days</item>
+        <item>29 days</item>
+        <item>30 days</item>
+    </string-array>
+    <string name="title_activity_maps">Map</string>
+</resources>
