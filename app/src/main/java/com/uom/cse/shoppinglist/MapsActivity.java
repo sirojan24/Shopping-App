@@ -1,23 +1,54 @@
 package com.uom.cse.shoppinglist;
 
+import android.location.Location;
+import android.location.LocationListener;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.uom.cse.shoppinglist.gpsTracker.GPSTracker;
 
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-
+    // GPSTracker class
+    GPSTracker gps;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
+
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                //finish();
+                // create class object
+                gps = new GPSTracker(MapsActivity.this);
+
+                // check if GPS enabled
+                if(gps.canGetLocation()){
+
+                    ShopingListActivity.lati = gps.getLatitude();
+                    ShopingListActivity.longi = gps.getLongitude();
+                    finish();
+
+                }
+            }
+        });
+
+        Toast.makeText(this, "Long Press to Add New Location", Toast.LENGTH_LONG).show();
+
+
+
     }
+
+
 
     @Override
     protected void onResume() {
@@ -60,6 +91,20 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        // create class object
+        gps = new GPSTracker(MapsActivity.this);
+
+        double lati = 0.0;
+        double longi = 0.0;
+
+        // check if GPS enabled
+        if(gps.canGetLocation()){
+
+            lati = gps.getLatitude();
+            longi = gps.getLongitude();
+
+        }
+        mMap.addMarker(new MarkerOptions().position(new LatLng(lati, longi)).title("Current Location"));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lati, longi), 16.0f));
     }
 }

@@ -1,6 +1,7 @@
 package com.uom.cse.shoppinglist;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class ShopingListActivity extends AppCompatActivity
@@ -39,6 +41,10 @@ public class ShopingListActivity extends AppCompatActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private int position;
+
+    public static double lati;
+    public static double longi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,13 +59,48 @@ public class ShopingListActivity extends AppCompatActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        //Fragment selectedFragment = new ShoppingListFragment();
-        Fragment selectedFragment = new MapFragment();
+
+        Fragment selectedFragment = null;
+
+        switch (position) {
+            case 0 :
+                selectedFragment = new ShoppingListFragment();
+                mTitle = getString(R.string.title_section1);
+                break;
+            case 1 :
+                selectedFragment = new AddNewLocationFragment();
+                break;
+        }
+
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, selectedFragment)
                 .commit();
+    }
+
+    @Override
+    protected void onResume() {
+        Fragment selectedFragment = null;
+
+        switch (position) {
+            case 0 :
+                selectedFragment = new ShoppingListFragment();
+                mTitle = getString(R.string.title_section1);
+                break;
+            case 1 :
+                selectedFragment = new AddNewLocationFragment();
+                Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " +
+                        lati + "\nLong: " + longi, Toast.LENGTH_LONG).show();
+                break;
+        }
+
+        // update the main content by replacing fragments
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, selectedFragment)
+                .commit();
+        super.onResume();
     }
 
     @Override
@@ -73,13 +114,20 @@ public class ShopingListActivity extends AppCompatActivity
                 selectedFragment = new ShoppingListFragment();
                 mTitle = getString(R.string.title_section1);
                 break;
+            case 1 :
+                Intent intent = new Intent(this, MapsActivity.class);
+                startActivity(intent);
+                break;
         }
 
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, selectedFragment)
-                .commit();
+        if(selectedFragment != null){
+            // update the main content by replacing fragments
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, selectedFragment)
+                    .commit();
+        }
+
     }
 
     public void onAddItemSelected(){

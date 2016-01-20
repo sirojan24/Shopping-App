@@ -32,7 +32,7 @@ public class MapFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mapView = inflater.inflate(R.layout.activity_maps, container, false);
 
-        //setUpMapIfNeeded();
+        setUpMapIfNeeded();
         return mapView;
     }
 
@@ -42,6 +42,7 @@ public class MapFragment extends Fragment {
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
+
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 setUpMap();
