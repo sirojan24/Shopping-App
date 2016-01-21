@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -127,7 +128,8 @@ public class MapsActivity extends FragmentActivity {
             markerMap.put(marker, location);
         }
 
-        mMap.addMarker(new MarkerOptions().position(new LatLng(lati, longi)).title("Current Location"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(lati, longi)).title("Current Location")
+        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lati, longi), 16.0f));
 
 

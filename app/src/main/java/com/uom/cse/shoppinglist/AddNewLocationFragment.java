@@ -28,6 +28,8 @@ public class AddNewLocationFragment extends Fragment {
 
     private Button btnSave;
 
+    private Button btnRemove;
+
     private EditText txtLocation;
 
     private CheckBox chkGrocery;
@@ -55,6 +57,7 @@ public class AddNewLocationFragment extends Fragment {
         addLocationView = inflater.inflate(R.layout.add_new_location_layout, container, false);
 
         btnSave = (Button) addLocationView.findViewById(R.id.btnSave);
+        btnRemove = (Button) addLocationView.findViewById(R.id.btnRemove);
 
         txtLocation = (EditText) addLocationView.findViewById(R.id.txtLocation);
 
@@ -72,6 +75,8 @@ public class AddNewLocationFragment extends Fragment {
         chkEntertainment = (CheckBox) addLocationView.findViewById(R.id.chkEntertainment);
 
         if (isEditing){
+            btnRemove.setEnabled(true);
+
             txtLocation.setText(location.getName());
 
             List<String> categories = location.getItems();
@@ -113,7 +118,20 @@ public class AddNewLocationFragment extends Fragment {
                 chkEntertainment.setChecked(true);
             }
 
+        }else{
+            btnRemove.setEnabled(false);
         }
+
+        btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isEditing){
+                    LocationDBHandler handler = new LocationDBHandler(getActivity());
+                    handler.deleteItem(location.getId());
+                    ((ShopingListActivity)getActivity()).startMapActivity();
+                }
+            }
+        });
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override

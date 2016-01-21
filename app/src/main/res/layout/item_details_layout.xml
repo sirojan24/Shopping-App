@@ -23,7 +23,7 @@
         android:layout_marginTop="10dp"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
@@ -32,13 +32,24 @@
         android:layout_toEndOf="@+id/imageView"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
         android:id="@+id/lblItemDisplayUnits"
-        android:layout_below="@+id/lblItemDisplayCategory"
-        android:layout_toEndOf="@+id/imageView"/>
+        android:layout_below="@+id/lblItemDisplayName"
+        android:layout_toEndOf="@+id/lblItemDisplayCategory"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/lblDistance"
+        android:layout_below="@+id/lblItemDisplayUnits"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_marginLeft="10dp"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -46,6 +57,6 @@
         android:layout_height="wrap_content"
         android:text="Complete Purchase"
         android:id="@+id/btnCompletePurchase"
-        android:layout_below="@+id/lblItemDisplayUnits"
+        android:layout_below="@+id/lblDistance"
         android:layout_toEndOf="@+id/imageView" />
 </RelativeLayout>

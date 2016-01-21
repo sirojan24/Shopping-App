@@ -47,6 +47,7 @@ public class ItemListAdapter extends BaseAdapter {
         TextView name = (TextView) row.findViewById(R.id.lblItemDisplayName);
         TextView category = (TextView) row.findViewById(R.id.lblItemDisplayCategory);
         TextView units = (TextView) row.findViewById(R.id.lblItemDisplayUnits);
+        TextView distance = (TextView) row.findViewById(R.id.lblDistance);
         Button btnCompletePurchase = (Button) row.findViewById(R.id.btnCompletePurchase);
 
         final Item item = itemList.get(position);
@@ -54,6 +55,7 @@ public class ItemListAdapter extends BaseAdapter {
         name.setText(item.getName());
         category.setText(item.getCategory());
         units.setText(item.getUnits());
+        distance.setText(item.getShortDistance() + "");
 
         btnCompletePurchase.setOnClickListener(new View.OnClickListener() {
             @Override

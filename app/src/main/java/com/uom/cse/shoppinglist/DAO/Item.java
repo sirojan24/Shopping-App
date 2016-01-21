@@ -1,6 +1,6 @@
 package com.uom.cse.shoppinglist.DAO;
 
-public class Item {
+public class Item implements Comparable<Item>{
 
     private Integer id;
     private String name;
@@ -9,6 +9,8 @@ public class Item {
     private String days;
     private int timestamp;
     private int isInList;
+    private Location location;
+    private double shortDistance;
 
     public Integer getId() {
         return id;
@@ -66,4 +68,35 @@ public class Item {
         this.isInList = isInList;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public double getShortDistance() {
+        return shortDistance;
+    }
+
+    public void setShortDistance(double shortDistance) {
+        this.shortDistance = shortDistance;
+    }
+
+    @Override
+    public int compareTo(Item another) {
+        double thisDis = 0.0;
+        double anoDis = 0.0;
+
+        if(this.shortDistance > 0){
+            thisDis = 1 / this.shortDistance;
+        }
+
+        if(another.getShortDistance() > 0){
+            anoDis = 1 / another.getShortDistance();
+        }
+
+        return Double.compare(anoDis, thisDis);
+    }
 }
