@@ -25,10 +25,83 @@
             android:layout_gravity="center_horizontal"
             android:hint="Location"/>
 
-            <CheckBox
-                android:layout_width="match_parent"
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Grosory"/>
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chkGrocery"
+                    android:text="Grocery"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chkVegetable"
+                    android:text="Vegetable"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chkFruit"
+                    android:text="Fruit"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chkMilkProduct"
+                    android:text="Milk Product"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chkMeatandNonVegetable"
+                    android:text="Meat and Non-vegetable"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chkBakeryProduct"
+                    android:text="Bakery Product"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chkElectricalItem"
+                    android:text="Electrical Item"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chkHardwareItem"
+                    android:text="Hardware Item"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chkHousekeepingItem"
+                    android:text="Housekeeping Item"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chkStationeryItem"
+                    android:text="Stationery Item"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chkMedicine"
+                    android:text="Medicine"/>
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chkEntertainment"
+                    android:text="Entertainment"/>
+            </LinearLayout>
+        </LinearLayout>
+
 
 
     </LinearLayout>
@@ -39,5 +112,12 @@
         android:layout_height="wrap_content"
         android:text="Save"
         android:id="@+id/btnSave"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/btnRemove"
         android:layout_marginTop="20dp"/>
 </LinearLayout>

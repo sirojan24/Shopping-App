@@ -42,8 +42,7 @@ public class ShopingListActivity extends AppCompatActivity
      */
     private int position;
 
-    public static double lati;
-    public static double longi;
+    public static double isMapBacked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +89,6 @@ public class ShopingListActivity extends AppCompatActivity
                 break;
             case 1 :
                 selectedFragment = new AddNewLocationFragment();
-                Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " +
-                        lati + "\nLong: " + longi, Toast.LENGTH_LONG).show();
                 break;
         }
 
@@ -101,6 +98,11 @@ public class ShopingListActivity extends AppCompatActivity
                 .replace(R.id.container, selectedFragment)
                 .commit();
         super.onResume();
+    }
+
+    public void startMapActivity(){
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
     }
 
     @Override

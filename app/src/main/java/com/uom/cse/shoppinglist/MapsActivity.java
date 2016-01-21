@@ -10,12 +10,20 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.uom.cse.shoppinglist.DAO.LocationDBHandler;
 import com.uom.cse.shoppinglist.gpsTracker.GPSTracker;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    private Map<Marker, com.uom.cse.shoppinglist.DAO.Location> markerMap = new HashMap<>();
+
     // GPSTracker class
     GPSTracker gps;
     @Override
@@ -27,25 +35,27 @@ public class MapsActivity extends FragmentActivity {
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
-                //finish();
-                // create class object
-                gps = new GPSTracker(MapsActivity.this);
-
-                // check if GPS enabled
-                if(gps.canGetLocation()){
-
-                    ShopingListActivity.lati = gps.getLatitude();
-                    ShopingListActivity.longi = gps.getLongitude();
-                    finish();
-
-                }
+                AddNewLocationFragment.setLonLat(latLng.longitude, latLng.latitude);
+                finish();
             }
         });
 
         Toast.makeText(this, "Long Press to Add New Location", Toast.LENGTH_LONG).show();
 
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                com.uom.cse.shoppinglist.DAO.Location location = markerMap.get(marker);
+
+                if(location != null) {
+                    AddNewLocationFragment.edit(location);
+                    finish();
+                }
 
 
+                return true;
+            }
+        });
     }
 
 
@@ -104,7 +114,22 @@ public class MapsActivity extends FragmentActivity {
             longi = gps.getLongitude();
 
         }
+
+        LocationDBHandler handler = new LocationDBHandler(this);
+        List<com.uom.cse.shoppinglist.DAO.Location> locations = handler.getAllItems();
+
+        for(com.uom.cse.shoppinglist.DAO.Location location : locations){
+            MarkerOptions options = new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude()))
+                    .title(location.getName());
+
+            Marker marker = mMap.addMarker(options);
+
+            markerMap.put(marker, location);
+        }
+
         mMap.addMarker(new MarkerOptions().position(new LatLng(lati, longi)).title("Current Location"));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lati, longi), 16.0f));
+
+
     }
 }
